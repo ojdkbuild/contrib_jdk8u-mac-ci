@@ -48,9 +48,9 @@ install:
   - curl -LO https://cr.openjdk.java.net/~akasko/jdk8u/8231254/webrev.00/jdk.changeset
   - hg import ./jdk.changeset
   - rm ./jdk.changeset
-  - curl -LO https://cr.openjdk.java.net/~akasko/jdk8u/8232178/8232178_8u.patch
-  - hg import ./8232178_8u.patch
-  - rm ./8232178_8u.patch
+  - curl -LO https://cr.openjdk.java.net/~akasko/jdk8u/8232178/webrev.00/jdk.patch
+  - hg import --no-commit ./jdk.patch
+  - rm ./jdk.patch
   - popd
   - pushd langtools
   - hg id
