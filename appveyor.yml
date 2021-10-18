@@ -15,14 +15,14 @@
 image: macos
 
 install:
-  - pwd
-  - brew install autoconf automake libtool
-  - /usr/libexec/java_home -v 1.8.0_232
+  - cd /Users/appveyor/projects
   - git -c http.sslVerify=false clone --depth=1 --branch VER-2-8-1 https://git.savannah.gnu.org/git/freetype/freetype2.git
-  - pushd freetype2
+  - cd /Users/appveyor/projects/freetype2
   - sh ./autogen.sh
   - ./configure
   - make -j 4
+  - cd /Users/appveyor/projects
+  - /Library/Java/JavaVirtualMachines/adoptopenjdk-15.jdk/Contents/Home/bin/java -version
 
 build_script:
   - pwd
