@@ -16,14 +16,47 @@ image: macos
 
 install:
   - cd /Users/appveyor/projects
+  - git --depth=1 https://github.com/ojdkbuild/tools_jtreg42_653.git jtreg
   - git -c http.sslVerify=false clone --depth=1 --branch VER-2-8-1 https://git.savannah.gnu.org/git/freetype/freetype2.git
   - cd /Users/appveyor/projects/freetype2
   - sh ./autogen.sh
   - ./configure
   - make -j 4
   - cd /Users/appveyor/projects
-  - /Library/Java/JavaVirtualMachines/adoptopenjdk-15.jdk/Contents/Home/bin/java -version
+  - curl -LO https://builds.shipilev.net/workspaces/jdk8u-jdk8u-dev.tar.xz
+  - tar xJf jdk8u-jdk8u-dev.tar.xz
+  - cd /Users/appveyor/projects/jdk8u-jdk8u-dev
+  - hg pull
+  - hg up
+  - bash ./common/bin/hgforest.sh pull
+  - bash ./common/bin/hgforest.sh up
+  - hg id
+  - pushd corba
+  - hg id
+  - popd
+  - pushd hotspot
+  - hg id
+  - popd
+  - pushd jaxp
+  - hg id
+  - popd
+  - pushd jaxws
+  - hg id
+  - popd
+  - pushd jdk
+  - hg id
+  - curl -LO https://cr.openjdk.java.net/~akasko/jdk8u/8231254/webrev.00/jdk.changeset
+  - hg import ./jdk.changeset
+  - rm ./jdk.changeset
+  - popd
+  - pushd langtools
+  - hg id
+  - popd
+  - pushd nashorn
+  - hg id
+  - popd
 
 build_script:
-  - pwd
-
+  - bash ./configure --with-boot-jdk=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home --with-toolchain-type=clang --with-freetype-include=/Users/appveyor/projects/freetype2/include/ --with-freetype-lib=/Users/appveyor/projects/freetype2/objs/.libs/
+  - make images
+  - bash /Users/appveyor/projects/contrib_jdk8u-mac-ci/run_test.sh
