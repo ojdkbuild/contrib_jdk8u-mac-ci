@@ -7,7 +7,7 @@ set -x
 /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin/java \
     -jar /Users/appveyor/projects/jtreg/lib/jtreg.jar \
     -a -v1 -nr \
-    -jdk:/Users/appveyor/projects/jdk8u-jdk8u-dev/macosx-x86_64-normal-server-release/images/j2sdk-image \
+    -jdk:/Users/appveyor/projects/jdk8u-jdk8u-dev/macosx-x86_64-normal-server-release/images/j2sdk-bundle/jdk1.8.0.jdk/Contents/Home \
     /Users/appveyor/projects/jdk8u-jdk8u-dev/jdk/test/java/nio/file/etc/MacVolumesTest.java
 
 cat ./JTwork/java/nio/file/etc/MacVolumesTest.jtr
