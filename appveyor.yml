@@ -16,7 +16,7 @@ image: macos
 
 install:
   - cd /Users/appveyor/projects
-  - git --depth=1 https://github.com/ojdkbuild/tools_jtreg42_653.git jtreg
+  - git clone --depth=1 https://github.com/ojdkbuild/tools_jtreg42_653.git jtreg
   - git -c http.sslVerify=false clone --depth=1 --branch VER-2-8-1 https://git.savannah.gnu.org/git/freetype/freetype2.git
   - cd /Users/appveyor/projects/freetype2
   - sh ./autogen.sh
